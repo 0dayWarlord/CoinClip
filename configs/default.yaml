@@ -1,0 +1,44 @@
+#default configuration for CoinCLIP training
+
+#data configuration
+data:
+  data_dir: "data/raw"
+  processed_dir: "data/processed"
+  max_text_length: 512
+  image_size: [224, 224]
+  augment: true
+
+#model configuration
+model:
+  text_encoder_name: "bert-base-uncased"
+  text_embedding_dim: 768
+  image_encoder_name: "resnet50"
+  image_embedding_dim: 2048
+  numeric_input_dim: 6
+  numeric_hidden_dims: [128, 64]
+  numeric_embedding_dim: 64
+  fusion_type: "concat"  #options: concat, attention, transformer
+  fusion_hidden_dim: 512
+  fusion_output_dim: 256
+  num_classes: 2
+  use_contrastive: true
+  contrastive_temperature: 0.07
+  dropout: 0.1
+  freeze_text_encoder: false
+  freeze_image_encoder: false
+
+#training configuration
+training:
+  batch_size: 32
+  eval_batch_size: 32
+  num_epochs: 50
+  learning_rate: 1e-4
+  weight_decay: 0.01
+  scheduler: "cosine"  #options: null, cosine
+  num_workers: 4
+  device: "cuda"
+  seed: 42
+  checkpoint_dir: "checkpoints"
+  log_dir: "logs"
+  save_best_metric: "val_loss"  #options: val_loss, val_accuracy, val_f1
+

@@ -1,0 +1,8 @@
+# CoinVibe dataset configuration
+
+data_dir: "data/raw"
+processed_dir: "data/processed"
+max_text_length: 512
+image_size: [224, 224]
+augment: true
+
